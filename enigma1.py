@@ -14,60 +14,63 @@ class Machine:
         self.String = str()
         self.sentense = str()
         
-    def imput(self, letter):
-        self.letter = letter
-        print(self.letter)
-
-        
-    def compute(self):
+##    def imput(self, letter):
+##        self.letter = letter
+##        print(self.letter)       
+    def compute(self, letter):
         R = self.R
         M = self.M
         L = self.L
-        sentense = self.sentense
-        String = self.String
-        for g in range(1):
-            for a in range(len(sentense)):
+        self.letter = letter
+##        sentense = self.sentense
+##        String = self.String
+##        for g in range(1):
+##            for a in range(len(sentense)):
                 
-                letter = sentense[a]
-                letter = Alphabet.index(letter)
-                letter = Commutator[Commutator.index(letter)+1]
+##        letter = sentense[a]
+        self.letter = Alphabet.index(self.letter)
+        self.letter = Commutator[Commutator.index(self.letter)+1]
 
-                R += 1
-                if R == 22:
-                    M += 1
-                    if M == 5:
-                        L += 1
-                        if L == 26:
-                            L = 0
-                    elif M == 26:
-                        M = 0
-                elif R == 26:
-                    R = 0
+        R += 1
+        if R == 22:
+            M += 1
+            if M == 5:
+                 L += 1
+                 if L == 26:
+                    L = 0
+            elif M == 26:
+                M = 0
+        elif R == 26:
+            R = 0
                       
-                i = (letter + R) % 26
-                m = Rottor3[Rottor3.index(i)+1]
-                i = (m + (M - R)) % 26           
-                m = Rottor2[Rottor2.index(i)+1]
-                i = (m + (L - M)) % 26
-                m = Rottor1[Rottor1.index(i)+1]
-                i = (m - L) % 26
-                m = Reflector_B[Reflector_B.index(i)+1]
-                i = (m + L) % 26
-                Rottor1.reverse()        
-                m = Rottor1[Rottor1.index(i)+1]
-                i = (m - (L - M)) % 26
-                Rottor2.reverse()
-                m = Rottor2[Rottor2.index(i)+1]
-                i = (m - (M - R)) % 26
-                Rottor3.reverse()
-                m = Rottor3[Rottor3.index(i)+1]
-                i = (m - R) % 26
-                m = Commutator[Commutator.index(i)+1]
+        i = (self.letter + R) % 26
+        m = Rottor3[Rottor3.index(i)+1]
+        i = (m + (M - R)) % 26           
+        m = Rottor2[Rottor2.index(i)+1]
+        i = (m + (L - M)) % 26
+        m = Rottor1[Rottor1.index(i)+1]
+        i = (m - L) % 26
+        m = Reflector_B[Reflector_B.index(i)+1]
+        i = (m + L) % 26
+        Rottor1.reverse()        
+        m = Rottor1[Rottor1.index(i)+1]
+        i = (m - (L - M)) % 26
+        Rottor2.reverse()
+        m = Rottor2[Rottor2.index(i)+1]
+        i = (m - (M - R)) % 26
+        Rottor3.reverse()
+        m = Rottor3[Rottor3.index(i)+1]
+        i = (m - R) % 26
+        self.letter = Commutator[Commutator.index(i)+1]
 
-                Rottor1.reverse()
-                Rottor2.reverse()
-                Rottor3.reverse()
-                
-                String += Alphabet[m]
-            print(String)
+        Rottor1.reverse()
+        Rottor2.reverse()
+        Rottor3.reverse()
+        
+##        String += Alphabet[m]
+        self.letter = Alphabet[self.letter]
+        print(self.letter)
+        return self.letter
+        
+        
 
