@@ -1,7 +1,7 @@
 import pygame
-from text import text_object, text_display
-from enigma1 import Machine
 
+from enigma1 import Machine
+from tests.text import text_display
 
 pygame.init()
 
@@ -14,15 +14,15 @@ window = pygame.display.set_mode(resolution)
 surface = pygame.Surface((390, 538))
 pygame.display.set_caption('ENIGMA')
 clock = pygame.time.Clock()
-coords = {'G': (201, 241), 'K': (311, 241), 'Q': (43, 214), 'E': (115, 214), 'N': (252, 270),
-          'T': (190, 214), 'W': (79, 214), 'P': (31, 270), 'D': (127, 241), 'H': (238, 241),
+coords = {'G': (201, 241), 'K': (311, 241), 'Q': (43, 214), 'E': (116, 214), 'N': (252, 270),
+          'T': (190, 214), 'W': (78, 214), 'P': (31, 270), 'D': (127, 241), 'H': (238, 241),
           'J': (274, 241), 'F': (164, 241), 'U': (233, 214), 'I': (300, 214), 'O': (337, 214),
-          'L': (326, 270), 'Y': (68, 270), 'S': (90, 241), 'A': (53, 241), 'R': (147, 214),
-          'Z': (226, 214), 'B': (216, 270), 'M': (289, 270), 'C': (142, 270), 'V': (179, 270),
+          'L': (326, 270), 'Y': (68, 270), 'S': (90, 241), 'A': (53, 241), 'R': (153, 214),
+          'Z': (227, 214), 'B': (216, 270), 'M': (289, 270), 'C': (142, 270), 'V': (179, 270),
           'X': (105, 270)}
-print(coords)
 f = open('cypher.txt', 'w')
 f1 = open('message.txt', 'w') 
+
 class Visual:
     def __init__(self, glow, ngm, window, surface, main, main2, intro = True):
         self.ngm = ngm
@@ -48,7 +48,7 @@ class Visual:
             pygame.display.update()
             clock.tick(15)
         
-    def game_loop(self, R=0, M=0, L=0, Exit = False, letter = 2):
+    def game_loop(self, R=0, M=0, L=0, Exit = False, letter = 1):
         self.letter = letter
         self.R = R
         self.M = M
@@ -62,24 +62,11 @@ class Visual:
             for event in pygame.event.get():
                 mouse = pygame.mouse.get_pos()
                 click = pygame.mouse.get_pressed()
-                print(mouse)
                 if event.type == pygame.QUIT:           ## проверка на нажатие "крестика"
                     pygame.quit()
                     quit()
                     
                 if event.type == pygame.KEYDOWN:   ## нажатие клавиш машины
-                    
-                    self.R += 1
-                    if self.R == 22:
-                        self.M += 1
-                        if self.M == 5:
-                             self.L += 1
-                             if self.L == 26:
-                                self.L = 0
-                        elif self.M == 26:
-                            self.M = 0
-                    elif self.R == 26:
-                        self.R = 0
                         
                     if event.key == pygame.K_q:
                         self.letter = 'Q'
@@ -169,7 +156,7 @@ class Visual:
             text_display(str(self.M), 369, 163)
             text_display(str(self.R), 409, 163)
             pygame.display.update()
-            clock.tick(20)
+            clock.tick(15)
             
               
 Visual(glow, ngm, window, surface, main, main2)
